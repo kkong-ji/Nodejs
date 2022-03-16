@@ -8,13 +8,26 @@ var conn = mysql.createConnection({
 
 conn.connect();
 
-var sql = 'SELECT * FROM topic';
-conn.query(sql, function(err, rows, fields){
+// var sql = 'SELECT * FROM topic';
+//
+// // conn.query(sql, function(err, rows, fields){
+// //   if(err) {
+// //     console.log(err);
+// //   } else {
+// //     for(var i=0; i<rows.length; i++){
+// //       console.log(rows[i].title);
+// //     }
+// //   }
+// // });
+
+var sql = 'INSERT INTO topic (title, description, author) VALUES(?, ?, ?)';
+var params = ['Supervisor', 'Watcher', 'graphitte'];
+
+conn.query(sql, params, function(err, rows, fields) {
   if(err) {
     console.log(err);
   } else {
-    console.log('rows', rows);
-    console.log('fields', fields);
+    console.log(rows);
   }
 });
 conn.end();
