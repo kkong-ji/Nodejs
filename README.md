@@ -108,3 +108,85 @@ fs.readFile('data.txt', {encoding:'UTF8'}, function(err, data) {
   console.log(data);
 })
 ```
+
+<br>
+
+### 7. Express
+
+- Express란? 
+ : 서버 쪽 어플리케이션을 좀 더 쉽게 구현시켜주는 웹 프레임워크(Framework)
+ 
+ > 💡Framework : 일정한 형태의 틀과 부품, 규약 등을 미리 제공하고 조립이 끝났을 때는 
+> <br>
+> 어떤 하나의 결과물이 탄생하게 되는 것
+> <br>
+> ex. Spring, Django, Ruby on Rails
+
+<br>
+
+설치
+ :`npm install --save express`
+ 
+ #### Express를 활용한 간단한 웹 앱
+`app.js`
+
+```javascript
+var express = require('express');
+var app = express();
+app.listen(3000, function() {
+    console.log('Connected 3000 port!');
+});
+```
+- Router : `get('/')`, `get('/login')` 과 같이 알맞은 주소값을 연결시켜주는 메소드
+- http 요청 메서드 : `GET, POST, PUT, DELETE`
+
+<br>
+
+### 8. 정적, 동적 웹 프로그래밍
+- **정적 프로그래밍(Static)**
+: 이미지, css, javascript 파일 등의 컨텐츠를 그대로 전달. (고정 이미지)
+
+- **동적 프로그래밍(Dynamic)**
+: 조금 더 프로그래밍적으로 접근하는 방식. 매번 새로운 내용을 표시해주고 변경도 가능.
+
+<br>
+
+#### 정적파일 서비스하기
+`app.js`
+
+```javascript
+var express = require('express');
+var app = express();
+app.use(express.static('public'));
+app.get('/', function(req, res){
+    res.send('Hello home page');
+});
+app.get('/login', function(req, res){
+    res.send('Login please');
+});
+app.listen(3000, function() {
+    console.log('Connected 3000 port!');
+});
+```
+
+<br>
+
+#### 동적으로 웹 서비스하기
+`app.js`
+
+```javascript
+app.get('/dynamic', function(req, res) {
+    var output = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title></title>
+      </head>
+      <body>
+        Hello Dynamic!
+      </body>
+    </html>`;
+    res.send(output);
+})
+```
